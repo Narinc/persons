@@ -81,10 +81,6 @@ android {
 dependencies {
 
     // Modules
-    implementation(project(Modules.domain))
-    implementation(project(Modules.data))
-    implementation(project(Modules.remote))
-    implementation(project(Modules.cache))
     implementation(project(Modules.presentation))
 
     // Core Dependencies
@@ -117,6 +113,7 @@ dependencies {
 
     // Glide
     implementation(UiDep.glide)
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
     kapt(UiDep.glideKapt)
 
     // Timber

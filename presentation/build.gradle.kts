@@ -45,8 +45,6 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.domain))
-
     implementation(PresentationDep.kotlin)
     implementation(PresentationDep.coroutineCore)
     // Dagger-Hilt (used for @InjectViewModel)

@@ -5,13 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.viewbinding.ViewBinding
-import com.narinc.rootproject.presenter.viewmodel.BaseViewModel
+import com.narinc.rootproject.extension.showSnackBar
 
-abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragment() {
+abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
 
     protected lateinit var binding: VB
-    protected abstract val viewModel: ViewModel
+    protected abstract val viewModel: VM
 
     abstract fun getViewBinding(): VB
 
@@ -32,27 +33,12 @@ abstract class BaseFragment<VB : ViewBinding, ViewModel : BaseViewModel> : Fragm
 
     private fun observerEvents() {
         viewModel.apply {
-            /*isLoading.observe(viewLifecycleOwner, {
-                handleLoading(it == true)
-            })
-            errorMessage.observe(viewLifecycleOwner, {
-                handleErrorMessage(it)
-            })
-            noInternetConnectionEvent.observe(viewLifecycleOwner, {
-                handleErrorMessage(getString(R.string.no_internet_connection))
-            })
-            connectTimeoutEvent.observe(viewLifecycleOwner, {
-                handleErrorMessage(getString(R.string.connect_timeout))
-            })
-            forceUpdateAppEvent.observe(viewLifecycleOwner, {
-                handleErrorMessage(getString(R.string.force_update_app))
-            })
-            serverMaintainEvent.observe(viewLifecycleOwner, {
-                handleErrorMessage(getString(R.string.server_maintain_message))
-            })
-            unknownErrorEvent.observe(viewLifecycleOwner, {
-                handleErrorMessage(getString(R.string.unknown_error))
-            })*/
+
         }
+    }
+
+    protected open fun handleErrorMessage(message: String?) {
+        if (message.isNullOrBlank()) return
+        showSnackBar(binding.root, message)
     }
 }
